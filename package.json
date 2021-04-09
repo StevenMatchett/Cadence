@@ -18,5 +18,11 @@
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^8.2.2"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "local-devices": "^3.0.0",
+    "samsung-tv-control": "^1.9.1"
   }
 }
