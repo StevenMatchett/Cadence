@@ -1,16 +1,16 @@
 // Modules to control application life and create native browser window
 const {app, BrowserWindow} = require('electron')
 const express = require('express')
-var Ant = require('ant-plus');
-
+// var Ant = require('gd-ant-plus');
+const scan = require('./getData');
+let cadence = 0
 function createWindow () {
-  // Create the browser window.
   createExpress();
+  scan.start();
+  scan.addSensorsListener((data)=>{
+    cadence = data.value;
+  })
 
-  const stick = new Ant.GarminStick2();
-
-  findSensor(stick,1);
-  // createExpress();
     
   const mainWindow = new BrowserWindow({
     width: 430,
@@ -24,28 +24,8 @@ function createWindow () {
   mainWindow.loadFile('index.html')
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
 }
-
-function findSensor(){
-  const Ant = require('ant-plus');
-  const stick = new Ant.GarminStick2();
-  // const speedCadenceSensor = new Ant.CadenceSensor(stick);
-  const speedCadenceScanner = new Ant.SpeedCadenceScanner(stick);
-  speedCadenceScanner.on('speedData', data => {
-    console.log(`id: ${data.DeviceID}`);
-    console.dir(data);
-  });
-  speedCadenceScanner.on('cadenceData', data => {
-    console.log(`id: ${data.DeviceID}`);
-    console.dir(data);
-  });
-    
-}
-
-
-
-
 
 
 // This method will be called when Electron has finished
@@ -72,9 +52,8 @@ function createExpress(){
   const port = 3000
 
   app.get('/status', (req, res) => {
-    res.send({sucess:true, cadence: Math.floor(Math.random() * 120)})
+    res.send({sucess:true, cadence: Math.floor(cadence)})
   })
-
 
   app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
 }

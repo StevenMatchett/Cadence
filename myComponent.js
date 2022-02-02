@@ -10,7 +10,7 @@ const Cadence = () => {
     },[])
     
 
-    return <div style={{color:"green", 'font-size': "48px"}}>{cadence}</div>
+    return <div style={{color:"green", 'font-size': "128px"}}>{cadence}</div>
 }
 const domContainer = document.querySelector('#root'); 
 ReactDOM.render(<Cadence/>, domContainer);
