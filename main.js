@@ -1,7 +1,6 @@
 // Modules to control application life and create native browser window
 const {app, BrowserWindow} = require('electron')
 const express = require('express')
-// var Ant = require('gd-ant-plus');
 const scan = require('./getData');
 let cadence = 0
 function createWindow () {
@@ -13,11 +12,7 @@ function createWindow () {
 
     
   const mainWindow = new BrowserWindow({
-    width: 430,
-    height: 1100,
-    // webPreferences: {
-    //   preload: path.join(__dirname, 'preload.js')
-    // }
+    fullscreen: true,
   })
 
   // and load the index.html of the app.
